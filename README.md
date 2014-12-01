@@ -6,7 +6,7 @@ Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance 
 ### From CUI Interface
 
     $ make
-    $ bin/construct_index sample/example.txt 16 0 sample/index_file
+    $ bin/construct_index sample/example.txt 16 0 sample/index_file     #compute an index that answer top 16 shortest distance on an undirected graph specified by sample/example.txt.
     $ bin/k_distance sample/index_file <<< "9 12"
     16 1 2 3 3 3 3 3 3 3 3 4 4 4 4 4 4
 
