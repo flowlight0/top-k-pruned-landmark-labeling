@@ -1,6 +1,6 @@
 Top-K Pruned Landmark Labeling
 ==============================
-Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance query on real-world networks, such as social networks and web graphs.
+Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance query on real-world networks, such as social networks and web graphs. 
 
 ## Usage 
 ### From CUI Interface
@@ -29,6 +29,9 @@ Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance 
 * Call `ConstructIndex` to construct an index from a given edge list.
 * Call `KDistanceQuery` to answer the top-k distance query.
 * Call `StoreIndex` to store the constructed index.
+* 
+### Warning
+Since the dialeter of real-world graphs, such as social networks and web graphs, are really small, out implementation exploit this property to save the memory usage. Therefore, when a diameter of a given graph is too large, it may return a wrong answer.
 
 ## Reference
 Takuya Akiba, Takanori Hayashi, Nozomi Nori, Yoichi Iwata, and Yuichi Yoshida,  **Efficient Top-k Shortest-Path Distance Queries on Large Networks by Pruned Landmark Labeling**.
