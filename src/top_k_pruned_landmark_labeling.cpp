@@ -710,7 +710,9 @@ bool TopKPrunedLandmarkLabeling::LoadIndex(ifstream &ifs){
 
 bool TopKPrunedLandmarkLabeling::LoadIndex(const char *file){
   ifstream ifs(file);
-  bool status = LoadIndex(file);
+  if (!ifs.good()) return false;
+  
+  bool status = LoadIndex(ifs);
   ifs.close();
   return status;
 }

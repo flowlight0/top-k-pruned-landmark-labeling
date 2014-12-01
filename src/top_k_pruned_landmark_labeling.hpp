@@ -47,7 +47,7 @@ class TopKPrunedLandmarkLabeling{
     uint8_t* addr;
     uint16_t offset[size];
   };
-
+  
   struct index_t{
     uint32_t	 *label;
     uint32_t	  length;
@@ -120,4 +120,5 @@ static const uint8_t INF8;
 
 
 #endif /* TOP_K_PRUNED_LANDMARK_LABELING_H */
+
 

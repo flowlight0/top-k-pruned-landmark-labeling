@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     cerr << "Usage: " << argv[0] << " (index_file)" << endl;
     exit(EXIT_FAILURE);
   }
-
+  
   TopKPrunedLandmarkLabeling kpll;
   
   if (!kpll.LoadIndex(argv[1])) {
