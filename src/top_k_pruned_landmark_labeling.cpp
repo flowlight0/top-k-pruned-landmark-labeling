@@ -680,7 +680,7 @@ bool TopKPrunedLandmarkLabeling::LoadIndex(ifstream &ifs){
 
       for (size_t i = 0; idv.label[i] != V;){
         dist_array_t &da = idv.d_array[i / dist_array_t::size];
-                
+        
         vector<uint8_t> d_count;
             
         size_t ni = i;

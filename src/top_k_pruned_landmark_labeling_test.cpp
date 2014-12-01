@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 using namespace std;
 
 const int V = 30;  
