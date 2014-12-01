@@ -24,7 +24,7 @@ public:
       V = max(V, (size_t)es[i].second + 1);
     }
     graph.resize(V);
-        
+    
     for (size_t i = 0; i < es.size(); i++){
       graph[es[i].first].push_back(es[i].second);
 

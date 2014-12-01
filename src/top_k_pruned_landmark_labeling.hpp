@@ -65,9 +65,11 @@ public:
   }
   
   ~TopKPrunedLandmarkLabeling();
-
+  
   int KDistanceQuery(int s, int t, size_t k, std::vector<int> &ret);
+  int KDistanceQuery(int s, int t, std::vector<int> &ret){ return KDistanceQuery(s, t, K, ret); }
   int KDistanceQuery(int s, int t, size_t k);
+  int KDistanceQuery(int s, int t){ return KDistanceQuery(s, t, K); }
   
   bool   ConstructIndex(const std::vector<std::pair<int, int> > &es, size_t K, bool directed);
   bool   StoreIndex(std::ofstream &ofs);
