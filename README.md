@@ -4,5 +4,5 @@ Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance 
 
 
 ## Reference
-Takuya Akiba, Takanori Hayashi, Nozomi Nori, Yoichi Iwata and Yuichi Yoshida,  **[Efficient Top-k Shortest-Path Distance Queries on Large Networks by Pruned Landmark Labeling]**.
+Takuya Akiba, Takanori Hayashi, Nozomi Nori, Yoichi Iwata and Yuichi Yoshida,  **Efficient Top-k Shortest-Path Distance Queries on Large Networks by Pruned Landmark Labeling**.
 In *AAAI 2015*, to appear. 
