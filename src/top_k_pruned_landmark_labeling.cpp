@@ -27,7 +27,7 @@ double GetCurrentTimeSec(){
   return tv.tv_sec + tv.tv_usec * 1e-6;
 }
 
-// ラベルiの距離配列の先頭アドレスの取得
+// the address of the distance array of label l
 inline uint8_t* TopKPrunedLandmarkLabeling::index_t::
 GetDistArray(size_t i) const {
   size_t off = i & dist_array_t::mask;      
@@ -35,7 +35,7 @@ GetDistArray(size_t i) const {
   return dn.addr + (off == 0 ? 0 : dn.offset[off - 1]);
 }
 
-// ラベルiの距離配列の長さ
+//the length of the distance array of label l
 inline uint8_t TopKPrunedLandmarkLabeling::index_t::
 DistArrayLength(size_t i) const {
   size_t off = i & dist_array_t::mask;      
@@ -45,7 +45,6 @@ DistArrayLength(size_t i) const {
 
 // ラベルiの距離配列の要素数がnmembに領域を割り当て
 // ラベルiに対する処理後j < iとなるラベルjに対して呼び出されない。
-
 inline bool TopKPrunedLandmarkLabeling::index_t::
 ReAllocDistArray(size_t i, size_t nmemb){
   size_t off = i & dist_array_t::mask;
@@ -60,8 +59,6 @@ ReAllocDistArray(size_t i, size_t nmemb){
     return true;
   }
 }
-
-// 辺集合とKを受け取りグラフの頂点を次数順に並び替えた後Indexing
 
 bool TopKPrunedLandmarkLabeling::
 ConstructIndex(const vector<pair<int, int> > &es, size_t K, bool directed){
@@ -176,7 +173,6 @@ KDistanceQuery(int s, int t, size_t k, vector<int> &ret){
   return ret.size() < k ? INT_MAX : 0;
 }
 
-// ラベル等に使用したメモリ量を計算
 size_t TopKPrunedLandmarkLabeling::
 IndexSize(){
   size_t sz = 0;
@@ -224,7 +220,6 @@ AverageLabelSize(){
 }
 
 
-// 一時配列とラベルの初期化
 void TopKPrunedLandmarkLabeling::
 Init(){
   tmp_pruned.resize(V, false);
@@ -328,12 +323,11 @@ CountLoops(uint32_t s, bool &status){
   std::queue<uint32_t> node_que[2];
   vector<uint32_t>     updated;
   const vector<vector<uint32_t> > &fgraph = graph[0];
-    
+  
   node_que[curr].push(s);
   updated.push_back(s);
   tmp_dist_count[curr][s] = 1;
 
-  // 2つのqueueを距離が１増えるごとに入れ替えて探索していく。
   for (;;){
     if (dist == INF8 && status){
       cerr << "Warning: Self loops become too long." << endl;
@@ -342,7 +336,7 @@ CountLoops(uint32_t s, bool &status){
         
     while (!node_que[curr].empty() && count < K){
       uint32_t v = node_que[curr].front(); node_que[curr].pop();
-      uint8_t  c = tmp_dist_count[curr][v]; // 始点からvに距離distで来るパスの数
+      uint8_t  c = tmp_dist_count[curr][v]; // the number of path from s to v with dist hops.
       tmp_dist_count[curr][v] = 0;
       if (c == 0) continue;
       
@@ -444,7 +438,6 @@ PrunedBfs(uint32_t s, bool rev, bool &status){
   ResetTempVars(s, updated, rev);
 };
 
-// 累積和計算のための配列tmp_s_countを計算し枝刈りを高速化
 inline void TopKPrunedLandmarkLabeling::
 SetStartTempVars(uint32_t s, bool rev){
   const index_t &ids = index[directed && !rev][s];
@@ -467,7 +460,6 @@ SetStartTempVars(uint32_t s, bool rev){
   }
 }
 
-// 更新されたテーブルをもとに戻す
 inline void TopKPrunedLandmarkLabeling::
 ResetTempVars(uint32_t s, const vector<uint32_t> &updated, bool rev){
   // cerr << rev << " " << s << " " << V << endl;
@@ -488,8 +480,6 @@ ResetTempVars(uint32_t s, const vector<uint32_t> &updated, bool rev){
   }
 }
 
-
-// bfsの始点sからvへの距離d以下のパスの個数がK個以上なら枝刈り
 inline bool TopKPrunedLandmarkLabeling::
 Pruning(uint32_t v,  uint8_t d, bool rev){
   const index_t &idv = index[rev][v];
@@ -498,12 +488,11 @@ Pruning(uint32_t v,  uint8_t d, bool rev){
   _mm_prefetch(idv.offset, _MM_HINT_T0);
     
   size_t pcount = 0;
-
+  
   // cerr << "Pruning start" << endl;
   for (size_t pos = 0;; pos++){
     uint32_t w = idv.label[pos];
-    // cerr << "label: " << w << " " << (int)tmp_s_offset[w] << endl;
-        
+    
     if (tmp_s_offset[w] == INF8) continue;
     if (w == V) break;
         
@@ -513,7 +502,7 @@ Pruning(uint32_t v,  uint8_t d, bool rev){
     int l = dcs.size() - 1;
     int c = d - tmp_s_offset[w] - idv.offset[pos];
         
-    // tmp_s_countテーブルを利用してループを１重に
+    // By using precompurted table tmp_s_count, compute the number of path with a single loop.
     for (int i = 0; i <= c && dcv[i] != INF8; i++){
       pcount += (int)dcs[std::min(c - i, l)] * dcv[i];
     }
