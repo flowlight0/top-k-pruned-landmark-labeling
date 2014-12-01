@@ -115,13 +115,13 @@ TopKPrunedLandmarkLabeling::
 
 
 int TopKPrunedLandmarkLabeling::
-KDistanceQuery(int s, int t, size_t k){
+KDistanceQuery(int s, int t, uint8_t k){
   vector<int> dists;
   return KDistanceQuery(s, t, k, dists);
 }
 
 int TopKPrunedLandmarkLabeling::
-KDistanceQuery(int s, int t, size_t k, vector<int> &ret){
+KDistanceQuery(int s, int t, uint8_t k, vector<int> &ret){
   ret.clear();
   s = alias[s];
   t = alias[t];
@@ -143,7 +143,7 @@ KDistanceQuery(int s, int t, size_t k, vector<int> &ret){
             
       uint8_t *dcs = ids.GetDistArray(pos1);
       uint8_t *dct = idt.GetDistArray(pos2);
-            
+      
       for (size_t i = 0; dcs[i] != INF8; i++){
         for (size_t j = 0; dct[j] != INF8; j++){
           for (size_t m = 0; m < loop_count[W].size(); m++){

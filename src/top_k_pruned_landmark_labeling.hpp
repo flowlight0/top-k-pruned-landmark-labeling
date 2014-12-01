@@ -66,9 +66,9 @@ public:
   
   ~TopKPrunedLandmarkLabeling();
   
-  int KDistanceQuery(int s, int t, size_t k, std::vector<int> &ret);
+  int KDistanceQuery(int s, int t, uint8_t k, std::vector<int> &ret);
   int KDistanceQuery(int s, int t, std::vector<int> &ret){ return KDistanceQuery(s, t, K, ret); }
-  int KDistanceQuery(int s, int t, size_t k);
+  int KDistanceQuery(int s, int t, uint8_t k);
   int KDistanceQuery(int s, int t){ return KDistanceQuery(s, t, K); }
   
   bool   ConstructIndex(const std::vector<std::pair<int, int> > &es, size_t K, bool directed);
@@ -85,7 +85,7 @@ public:
   
 private:
   size_t V;
-  size_t K;
+  uint8_t K;
   bool directed;
   // We assume that the diameter of a given network is less than 128.    
   static const uint8_t INF8; 
