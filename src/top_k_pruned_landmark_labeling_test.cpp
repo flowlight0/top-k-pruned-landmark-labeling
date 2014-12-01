@@ -274,3 +274,31 @@ TEST(INDEX_IO_TEST, D_HANDMADE0){
     CheckIndexIO(es, V, k, true);
   }
 }
+
+TEST(FREE_TEST, CONSTRUCT){
+  TopKPrunedLandmarkLabeling kpll;
+
+  int num_trials = 20;
+  int V          = 200;
+
+  ASSERT_TRUE(kpll.ConstructIndex(GenerateRandom(V, 0), K, false));
+  
+  for (int i = 1; i <= num_trials; i++){
+    ASSERT_TRUE(kpll.ConstructIndex(GenerateRandom(V, i), K, false));
+  }
+}
+
+TEST(FREE_TEST, LOAD_STORE){
+  TopKPrunedLandmarkLabeling kpll;
+  
+  int num_trials = 20;
+  int V          = 200;
+
+  kpll.ConstructIndex(GenerateRandom(V, 0), K, false);
+  ASSERT_TRUE(kpll.StoreIndex("sample/test_index"));
+  
+  for (int i = 1; i <= num_trials; i++){
+    ASSERT_TRUE(kpll.LoadIndex("sample/test_index"));
+    ASSERT_TRUE(kpll.StoreIndex("sample/test_index"));
+  }
+}

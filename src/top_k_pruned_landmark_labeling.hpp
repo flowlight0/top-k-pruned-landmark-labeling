@@ -49,8 +49,8 @@ class TopKPrunedLandmarkLabeling{
   };
   
   struct index_t{
-    uint32_t	 *label;
-    uint32_t	  length;
+    uint32_t     *label;
+    uint32_t      length;
     uint8_t      *offset;
     dist_array_t *d_array;
     inline uint8_t *GetDistArray(size_t i) const ;
@@ -88,7 +88,7 @@ private:
   size_t K;
   bool directed;
   // We assume that the diameter of a given network is less than 128.    
-static const uint8_t INF8; 
+  static const uint8_t INF8; 
   
   double loop_count_time;
   double indexing_time;

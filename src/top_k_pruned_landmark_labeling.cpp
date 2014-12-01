@@ -251,6 +251,27 @@ Init(){
 
 void TopKPrunedLandmarkLabeling::
 Free(){
+  V = K = loop_count_time = indexing_time = 0;
+  directed = false;
+  
+  alias.clear();
+  loop_count.clear();
+  
+  for (int i = 0; i < 2; i++){
+    graph[i].clear();
+  }
+  
+  tmp_pruned.clear();
+  tmp_offset.clear();
+  tmp_count .clear();
+  tmp_s_offset.clear();
+  tmp_s_count .clear();
+  
+  for (int i = 0; i < 2; i++){
+    tmp_dist_count[i].clear();
+  }
+  
+  
   for (int dir = 0; dir < 1 + directed; dir++){
     for (size_t v = 0; v < V; v++){
       index_t &idv = index[dir][v];
@@ -260,7 +281,7 @@ Free(){
       if (idv.offset != NULL) free(idv.offset);
       
       if (idv.d_array != NULL){
-        for (size_t i = 0; i < idv.length - 1; i += dist_array_t::size){
+        for (size_t i = 0; i < idv.length; i += dist_array_t::size){
           free(idv.d_array[i / dist_array_t::size].addr);
         }
         free(idv.d_array);
