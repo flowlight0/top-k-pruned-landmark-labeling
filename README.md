@@ -29,7 +29,8 @@ Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance 
 * Call `ConstructIndex` to construct an index from a given edge list.
 * Call `KDistanceQuery` to answer the top-k distance query.
 * Call `StoreIndex` to store the constructed index.
-* 
+
+
 ### Warning
 Since the dialeter of real-world graphs, such as social networks and web graphs, are really small, out implementation exploit this property to save the memory usage. Therefore, when a diameter of a given graph is too large, it may return a wrong answer.
 
