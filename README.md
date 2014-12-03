@@ -32,7 +32,7 @@ Top-K Pruned Landmark Labeling is a fast algorithm for answering top-k distance 
 
 
 ### Warning
-Since the dialeter of real-world graphs, such as social networks and web graphs, are really small, out implementation exploit this property to save the memory usage. Therefore, when a diameter of a given graph is too large, it may return a wrong answer.
+Since the dialeter of real-world graphs, such as social networks and web graphs, are really small, our implementation exploit this property to save the memory usage. Therefore, when a diameter of a given graph is too large, it may return a wrong answer.
 
 ## Reference
 Takuya Akiba, Takanori Hayashi, Nozomi Nori, Yoichi Iwata, and Yuichi Yoshida,  **Efficient Top-k Shortest-Path Distance Queries on Large Networks by Pruned Landmark Labeling**.
