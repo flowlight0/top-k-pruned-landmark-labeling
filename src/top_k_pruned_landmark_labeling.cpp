@@ -43,8 +43,6 @@ DistArrayLength(size_t i) const {
   return off == 0 ? da.offset[0] : da.offset[off] - da.offset[off - 1];
 }
 
-// ラベルiの距離配列の要素数がnmembに領域を割り当て
-// ラベルiに対する処理後j < iとなるラベルjに対して呼び出されない。
 inline bool TopKPrunedLandmarkLabeling::index_t::
 ReAllocDistArray(size_t i, size_t nmemb){
   size_t off = i & dist_array_t::mask;
