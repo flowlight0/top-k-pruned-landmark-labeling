@@ -36,4 +36,4 @@ Since the dialeter of real-world graphs, such as social networks and web graphs,
 
 ## Reference
 Takuya Akiba, Takanori Hayashi, Nozomi Nori, Yoichi Iwata, and Yuichi Yoshida,  **Efficient Top-k Shortest-Path Distance Queries on Large Networks by Pruned Landmark Labeling**.
-In *AAAI 2015*, to appear. 
+In *AAAI 2015*. 
